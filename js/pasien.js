@@ -1,25 +1,47 @@
-let pasien = [];
+import { db } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-document.getElementById("pasienForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+const pasienRef = collection(db, "pasien");
+const list = document.getElementById("listPasien");
 
-    let nama = document.getElementById("nama").value;
-    let nik = document.getElementById("nik").value;
-    let hp = document.getElementById("hp").value;
+async function loadPasien() {
+  list.innerHTML = "";
+  const snapshot = await getDocs(pasienRef);
 
-    pasien.push({ nama, nik, hp });
+  snapshot.forEach(docSnap => {
+    const data = docSnap.data();
 
-    tampilkan();
-    this.reset();
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${data.nama} - ${data.nik} - ${data.hp}
+      <button onclick="hapus('${docSnap.id}')">Hapus</button>
+    `;
+    list.appendChild(li);
+  });
+}
+
+window.hapus = async (id) => {
+  await deleteDoc(doc(db, "pasien", id));
+  loadPasien();
+};
+
+document.getElementById("pasienForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  await addDoc(pasienRef, {
+    nama: nama.value,
+    nik: nik.value,
+    hp: hp.value
+  });
+
+  e.target.reset();
+  loadPasien();
 });
 
-function tampilkan() {
-    let list = document.getElementById("listPasien");
-    list.innerHTML = "";
-
-    pasien.forEach(p => {
-        let li = document.createElement("li");
-        li.innerText = `${p.nama} - ${p.nik} - ${p.hp}`;
-        list.appendChild(li);
-    });
-}
+loadPasien();
