@@ -193,3 +193,94 @@ body {
     background: #dc3545;
     color: white;
 }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 220px;
+    background: #0d6efd;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.logout {
+    margin-top: 20px;
+    color: #ffdddd;
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+}
+
+.form-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form-box input,
+.form-box button {
+    padding: 10px;
+}
+
+.form-box button {
+    background: #0d6efd;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.data-table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+}
+
+.data-table th {
+    background: #212529;
+    color: white;
+    padding: 12px;
+}
+
+.data-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.data-table button {
+    padding: 6px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.data-table button:first-child {
+    background: #ffc107;
+}
+
+.data-table button:last-child {
+    background: #dc3545;
+    color: white;
+}

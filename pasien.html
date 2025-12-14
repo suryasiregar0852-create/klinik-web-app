@@ -8,7 +8,6 @@
 <body>
 
 <div class="app">
-    <!-- SIDEBAR -->
     <aside class="sidebar">
         <h2>KLINIK</h2>
         <a href="dashboard.html">Dashboard</a>
@@ -16,22 +15,17 @@
         <a href="index.html" class="logout">Logout</a>
     </aside>
 
-    <!-- CONTENT -->
     <main class="content">
         <h1>Manajemen Data Pasien</h1>
 
-        <!-- FORM -->
         <form id="pasienForm" class="form-box">
-            <input type="hidden" id="id_pasien">
-
+            <input type="hidden" id="editIndex">
             <input type="text" id="nama" placeholder="Nama Pasien" required>
             <input type="text" id="nik" placeholder="NIK" required>
             <input type="text" id="hp" placeholder="No HP">
-
             <button type="submit">Simpan</button>
         </form>
 
-        <!-- TABLE -->
         <table class="data-table">
             <thead>
                 <tr>
@@ -46,6 +40,6 @@
     </main>
 </div>
 
-<script type="module" src="js/pasien.js"></script>
+<script src="js/pasien.js"></script>
 </body>
 </html>

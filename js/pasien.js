@@ -1,78 +1,73 @@
-console.log("PASIENT JS JALAN");
-
-import { db } from "./firebase.js";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-  updateDoc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const pasienRef = collection(db, "pasien");
-const tabel = document.getElementById("tabelPasien");
 const form = document.getElementById("pasienForm");
+const tabel = document.getElementById("tabelPasien");
+const editIndex = document.getElementById("editIndex");
 
-let editId = null;
-
-// LOAD DATA
-async function loadPasien() {
-  tabel.innerHTML = "";
-  const snapshot = await getDocs(pasienRef);
-
-  snapshot.forEach(d => {
-    const p = d.data();
-    tabel.innerHTML += `
-      <tr>
-        <td>${p.nama}</td>
-        <td>${p.nik}</td>
-        <td>${p.hp}</td>
-        <td>
-          <button onclick="editPasien('${d.id}','${p.nama}','${p.nik}','${p.hp}')">Edit</button>
-          <button onclick="hapusPasien('${d.id}')">Hapus</button>
-        </td>
-      </tr>
-    `;
-  });
+function getData() {
+    return JSON.parse(localStorage.getItem("pasien")) || [];
 }
 
-// TAMBAH / UPDATE
-form.addEventListener("submit", async e => {
-  e.preventDefault();
+function saveData(data) {
+    localStorage.setItem("pasien", JSON.stringify(data));
+}
 
-  const data = {
-    nama: nama.value,
-    nik: nik.value,
-    hp: hp.value
-  };
+function tampilkanData() {
+    const data = getData();
+    tabel.innerHTML = "";
 
-  if (editId === null) {
-    await addDoc(pasienRef, data);
-  } else {
-    await updateDoc(doc(db, "pasien", editId), data);
-    editId = null;
-  }
+    data.forEach((p, i) => {
+        tabel.innerHTML += `
+            <tr>
+                <td>${p.nama}</td>
+                <td>${p.nik}</td>
+                <td>${p.hp}</td>
+                <td>
+                    <button onclick="editData(${i})">Edit</button>
+                    <button onclick="hapusData(${i})">Hapus</button>
+                </td>
+            </tr>
+        `;
+    });
+}
 
-  form.reset();
-  loadPasien();
+form.addEventListener("submit", e => {
+    e.preventDefault();
+    const data = getData();
+
+    const pasien = {
+        nama: nama.value,
+        nik: nik.value,
+        hp: hp.value
+    };
+
+    if (editIndex.value === "") {
+        data.push(pasien);
+    } else {
+        data[editIndex.value] = pasien;
+        editIndex.value = "";
+    }
+
+    saveData(data);
+    form.reset();
+    tampilkanData();
 });
 
-// EDIT
-window.editPasien = (id, namaP, nikP, hpP) => {
-  editId = id;
-  nama.value = namaP;
-  nik.value = nikP;
-  hp.value = hpP;
+window.editData = index => {
+    const data = getData();
+    const p = data[index];
+
+    nama.value = p.nama;
+    nik.value = p.nik;
+    hp.value = p.hp;
+    editIndex.value = index;
 };
 
-// DELETE
-window.hapusPasien = async id => {
-  if (confirm("Hapus data pasien?")) {
-    await deleteDoc(doc(db, "pasien", id));
-    loadPasien();
-  }
+window.hapusData = index => {
+    if (confirm("Hapus data pasien?")) {
+        const data = getData();
+        data.splice(index, 1);
+        saveData(data);
+        tampilkanData();
+    }
 };
 
-loadPasien();
-
+tampilkanData();
