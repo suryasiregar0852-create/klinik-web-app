@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Manajemen Pasien</title>
+    <title>Manajemen Dokter</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,17 +14,17 @@
         <a href="pasien.html">Data Pasien</a>
         <a href="dokter.html" class="admin-only">Data Dokter</a>
         <a href="pelayanan.html">Pelayanan</a>
-        <a href="index.html" class="logout">Logout</a>
+        <a href="#" onclick="logout()" class="logout">Logout</a>
     </aside>
 
     <main class="content">
-        <h1>Manajemen Data Pasien</h1>
+        <h1>Manajemen Data Dokter</h1>
 
-        <form id="pasienForm" class="form-box">
+        <form id="dokterForm" class="form-box">
             <input type="hidden" id="editIndex">
-            <input type="text" id="nama" placeholder="Nama Pasien" required>
-            <input type="text" id="nik" placeholder="NIK" required>
-            <input type="text" id="hp" placeholder="No HP">
+            <input type="text" id="nama" placeholder="Nama Dokter" required>
+            <input type="text" id="spesialis" placeholder="Spesialis" required>
+            <input type="text" id="jadwal" placeholder="Jadwal Praktik">
             <button type="submit">Simpan</button>
         </form>
 
@@ -32,16 +32,17 @@
             <thead>
                 <tr>
                     <th>Nama</th>
-                    <th>NIK</th>
-                    <th>No HP</th>
+                    <th>Spesialis</th>
+                    <th>Jadwal</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
-            <tbody id="tabelPasien"></tbody>
+            <tbody id="tabelDokter"></tbody>
         </table>
     </main>
 </div>
 
-<script src="js/pasien.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dokter.js"></script>
 </body>
 </html>

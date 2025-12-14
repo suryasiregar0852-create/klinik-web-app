@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pelayanan & Rekam Medis</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <h2>KLINIK</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="pasien.html">Data Pasien</a>
+        <a href="dokter.html" class="admin-only">Data Dokter</a>
+        <a href="pelayanan.html">Pelayanan</a>
+        <a href="#" onclick="logout()" class="logout">Logout</a>
+    </aside>
+
+    <main class="content">
+        <h1>Pelayanan & Rekam Medis</h1>
+
+        <form id="pelayananForm" class="form-box">
+            <input type="hidden" id="editIndex">
+
+            <select id="pasien" required>
+                <option value="">Pilih Pasien</option>
+            </select>
+
+            <select id="dokter" required>
+                <option value="">Pilih Dokter</option>
+            </select>
+
+            <input type="date" id="tanggal" required>
+            <input type="text" id="keluhan" placeholder="Keluhan" required>
+            <input type="text" id="diagnosa" placeholder="Diagnosa">
+            <input type="text" id="tindakan" placeholder="Tindakan">
+            <button type="submit">Simpan</button>
+        </form>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Pasien</th>
+                    <th>Dokter</th>
+                    <th>Keluhan</th>
+                    <th>Diagnosa</th>
+                    <th>Tindakan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabelPelayanan"></tbody>
+        </table>
+    </main>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/pelayanan.js"></script>
+</body>
+</html>
