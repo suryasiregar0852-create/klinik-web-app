@@ -1,3 +1,5 @@
+console.log("PASIENT JS JALAN");
+
 import { db } from "./firebase.js";
 import {
   collection,
@@ -73,3 +75,4 @@ window.hapusPasien = async id => {
 };
 
 loadPasien();
+
