@@ -2,26 +2,48 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Data Pasien</title>
+    <title>Manajemen Pasien</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="login-box">
-    <h2>Data Pasien</h2>
+<div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>KLINIK</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="pasien.html">Data Pasien</a>
+        <a href="index.html" class="logout">Logout</a>
+    </aside>
 
-    <form id="pasienForm">
-        <input type="text" id="nama" placeholder="Nama Pasien" required>
-        <input type="text" id="nik" placeholder="NIK" required>
-        <input type="text" id="hp" placeholder="No HP">
-        <button type="submit">Simpan</button>
-    </form>
+    <!-- CONTENT -->
+    <main class="content">
+        <h1>Manajemen Data Pasien</h1>
 
-    <ul id="listPasien"></ul>
+        <!-- FORM -->
+        <form id="pasienForm" class="form-box">
+            <input type="hidden" id="id_pasien">
 
-    <a href="dashboard.html">
-        <button>Kembali</button>
-    </a>
+            <input type="text" id="nama" placeholder="Nama Pasien" required>
+            <input type="text" id="nik" placeholder="NIK" required>
+            <input type="text" id="hp" placeholder="No HP">
+
+            <button type="submit">Simpan</button>
+        </form>
+
+        <!-- TABLE -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>No HP</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="tabelPasien"></tbody>
+        </table>
+    </main>
 </div>
 
 <script type="module" src="js/pasien.js"></script>
