@@ -7,7 +7,8 @@ const firebaseConfig = {
   projectId: "klinik-web-47757",
   storageBucket: "klinik-web-47757.firebasestorage.app",
   messagingSenderId: "718953699326",
-  appId: "1:718953699326:web:eb08d2cbc4e5012ec6d2af"
+  appId: "1:718953699326:web:eb08d2cbc4e5012ec6d2af",
+  measurementId: "G-Q49DLXX7DB"
 };
 
 const app = initializeApp(firebaseConfig);
